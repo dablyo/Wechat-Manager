@@ -33,8 +33,8 @@ function wm_preprocess($wp_query){
     global $object;
     if(!isset($object)){
         //创建一个WeChat类的实例, 回调函数名称为"onMessage",即消息处理函数
-        $object = new WeChat(TOKEN, "onMessage");
-        $object->process();  //处理消息
+        $object = new WeChat(TOKEN, "onMessage");  //WeChat类在wechat-manager-class.php中定义，主要处理和微信服务器的交互
+        $object->process();  //处理消息            //实际的处理通过回调方式由这里的OnMessage处理 
         return;
     }
 }

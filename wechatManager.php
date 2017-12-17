@@ -7,7 +7,8 @@ Version: 2.1
 Author: Specs
 Author URI: http://9iphp.com
 */
-
+#https://developer.wordpress.org/plugins/  wp插件开发
+#https://codex.wordpress.org/Developer_Documentation wp开发首页
 $siteurl = get_option('siteurl');           //get_option是wp的函数 参见http://wordpress.la/codex.html 不知道怎么导入的
 define('WECHAT_MANAGER_FOLDER', dirname(plugin_basename(__FILE__)));  ////定义常量
 define('WECHAT_MANAGER_STATIC', $siteurl.'/wp-content/plugins/' . WECHAT_MANAGER_FOLDER);  
