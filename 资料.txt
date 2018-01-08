@@ -1,0 +1,23 @@
+https://developer.wordpress.org/reference/hooks/pre_get_posts/
+https://stackoverflow.com/questions/22087311/wordpress-pre-get-posts-in-place-of-query-posts-on-pages
+https://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts
+https://wpshout.com/practical-uses-pre_get_posts/
+https://wpshout.com/wordpress-hooks-actions-filters-work/
+
+
+pre_get_posts
+--------------------------
+pre_get_posts 是在一个WP_Query运行之前修改它的效果的过滤器a filter that makes it possible to modify an existing WP_Query, before that query is actually run
+WP_Query用来从WP数据库中查询WP posts数据，后者是构成blog文章，页面，媒体的内容块。wp页面由一个多个posts bundle的循环loop构建，posts bundle由缺省WP_Query或者定制的WP_Query提取fetch。
+
+pre_get_posts在WP_Query从数据库中请求post bundle之前获取到post bundle。这个取决于传入pre_get_posts的名字。
+add_filter( 'pre_get_posts', 'wpshout_pages_blogindex' );
+function wpshout_pages_blogindex( $query ) {             //将首页默认显示最近的post修改为最近的page，这段代码放在当前theme中的functions.php。
+	if ( is_home() && $query->is_main_query() ) :    //结果就是index页面只有pages没有posts？？？什么意思
+		$query->set( 'post_type', 'page' );
+	endif;
+}
+
+pre_get_posts只能用来修改已存在的QP_Query.就是说需要修改既有的WP_Query的行为而不是重写一个WP_Query的时候，比如修改一个别人编写（来自外部插件的，来自wp的核心代码）WP_Query的行为。'recent posts'widget是wp核心代码的一部分，如果我们创建‘星战频道’页面，那么这个页面的'recent posts'widget仅显示具有‘星战’标签的recent posts。我们可以重写一个星战的recent posts widget。
+
+
